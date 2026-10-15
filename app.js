@@ -48,10 +48,15 @@ function dataSheet(wb,name){
 function readAttendance(wb){
  const rows=dataSheet(wb,'KẾT QUẢ 15.09-14.10');
  if(!rows)throw Error('Không tìm thấy tab KẾT QUẢ 15.09-14.10 trong CHẤM CÔNG KTD.xlsx');
- const base=Number(rows[2]?.[2])||18700;
+ const base=Number(rows[2]?.[2])||0;
  const lunch=Math.max(0,Number(rows[1]?.[2])||0);
  const out={};
- STAFF.forEach(s=>out[s.id]={...s,rate:s.id==='tinh'?27300:base,days:0,hours:0,after:0,late:0,pay:0,logs:[],cases:[],temporary:0,approved:0,albumin:0});
+ STAFF.forEach(s=>{
+  const title=String(rows[4]?.[s.col]||'');
+  const found=title.match(/(\d{4,7})\s*(?:vnđ|vnd|đ)\s*\/\s*giờ/i);
+  const rate=found?Number(found[1]):base;
+  out[s.id]={...s,rate:rate,days:0,hours:0,after:0,late:0,pay:0,logs:[],cases:[],temporary:0,approved:0,albumin:0};
+ });
  rows.slice(6,36).forEach(row=>{
   const date=dateKey(row[0]);
   if(!inPeriod(date))return;
