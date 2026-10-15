@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#672c32" />
+<title>Khiết Tâm Đường | Báo cáo nhân sự</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+ <div class="brand"><div class="brand-icon">蓮</div><div><div class="brand-name">KHIẾT TÂM ĐƯỜNG</div><div class="brand-sub">Báo cáo nhân sự</div></div></div>
+ <div class="menu-label">KỲ BÁO CÁO</div>
+ <div class="period">15/09 — 14/10/2026</div>
+ <div class="menu-label">THÀNH VIÊN</div>
+ <nav id="staff-nav" aria-label="Chọn nhân sự"></nav>
+ <div class="sidebar-bottom"><div class="offline-dot"></div><span>Độc lập · Không máy chủ dữ liệu</span></div>
+</aside>
+<main class="content">
+ <header class="top"><div><div class="eyebrow">BÁO CÁO HOẠT ĐỘNG · KTD</div><h1 id="page-title">Tổng quan nhân sự</h1><p class="sub" id="page-subtitle">Theo dõi thời gian làm việc và căn cứ công việc thực tế</p></div><div class="actions"><button class="btn btn-quiet" id="print">In / Lưu PDF</button><button class="btn btn-primary" id="open-import">Nhập 2 file Excel</button></div></header>
+ <section class="setup" id="setup"><div class="setup-title"><span class="badge">BƯỚC ĐẦU</span><h2>Nhập bảng chấm công và kiểm kho</h2><p>Chọn hai file .xlsx trên máy. Web xử lý ngay trong trình duyệt, không chuyển nội dung file lên GitHub hay máy chủ. Dữ liệu tổng hợp được lưu trên chính trình duyệt này để bạn xem lại.</p></div><div class="upload-grid"><label class="upload"><input type="file" id="attendance-file" accept=".xlsx,.xls"/><span class="file-icon">01</span><strong>CHẤM CÔNG KTD.xlsx</strong><span id="attendance-name">Chọn file chấm công</span></label><label class="upload"><input type="file" id="warehouse-file" accept=".xlsx,.xls"/><span class="file-icon">02</span><strong>KIỂM KHO.xlsx</strong><span id="warehouse-name">Chọn file kiểm kho</span></label></div><div class="setup-actions"><button id="process" class="btn btn-primary">Tạo báo cáo</button><span id="import-status" role="status"></span></div></section>
+ <section id="dashboard" class="hidden"><div id="source-note" class="notice"></div><div class="stat-grid" id="stats"></div><div class="panel two-panel"><div><h2>Tổng giờ trong ca</h2><p class="panel-sub">Giờ làm tính trong khung 09:00–18:00</p><div id="hours-bars"></div></div><div><h2>Ghi nhận theo nhân sự</h2><p class="panel-sub">Ca từ sổ Albumin là căn cứ tạm tính, không phải ca tính lương</p><div id="cases-bars"></div></div></div><div class="panel"><div class="panel-head"><div><h2>Bảng tổng hợp nhân sự</h2><p class="panel-sub">Chọn tên để xem ngày công và chi tiết ca</p></div></div><div class="table-wrap" id="staff-summary"></div></div><div id="staff-detail" class="panel hidden"></div></section>
+ <footer><span>KHIẾT TÂM ĐƯỜNG · THÂN KHỎE – TÂM AN – TRÍ SÁNG</span><button id="clear-data" class="link-btn">Xóa dữ liệu đã lưu trên thiết bị</button></footer>
+</main></div>
+</body></html>
